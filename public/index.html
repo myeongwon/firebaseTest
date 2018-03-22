@@ -40,6 +40,8 @@
     <div style="text-align:center;">
         사용자 e-mail db에서 가져오기
         <p class="data_text" style="color:green"></p>
+        <input class="update-data" type="text" name="" size="15" />
+        <button class="btn-update">수정하기</button>
     </div>
 
     <p id="load">Firebase SDK Loading&hellip;</p>
@@ -70,7 +72,11 @@
         var btn = document.querySelector('#btn-auth');
         var text = document.querySelector('.text');
         var btnSignOut = document.querySelector('.btn-signout');
+
         var dataValue = document.querySelector('.data_text');
+        var btnUpdate = document.querySelector('.btn-update');
+        var updateInput = document.querySelector('.update-data');
+
 
         btn.addEventListener('click', function(e){
           e.preventDefault();
@@ -116,6 +122,18 @@
               console.log(data);
               dataValue.innerHTML = data.email;
             });
+
+
+            // db 데이터 수정하기.
+            btnUpdate.addEventListener('click', function(){
+              // console.log(update)
+              var updateData = updateInput.value;
+              console.log(updateData);
+              var updates = {};
+              updates['user'] = updateData;
+              firebase.database().ref().update(updates);
+            });
+
 
 
           } else {
